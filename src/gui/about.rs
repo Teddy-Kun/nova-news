@@ -1,3 +1,6 @@
+#[cfg(feature = "wayland")]
+use libcosmic_wayland as cosmic;
+
 use cosmic::{cosmic_theme, iced::Alignment, theme, widget, Element};
 
 use crate::fl;

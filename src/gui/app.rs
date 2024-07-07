@@ -1,3 +1,8 @@
+#[cfg(feature = "wayland")]
+use cosmic::iced::window::Id;
+#[cfg(feature = "wayland")]
+use libcosmic_wayland as cosmic;
+
 use crate::fl;
 use cosmic::app::{Command, Core};
 use cosmic::widget::menu;
@@ -182,6 +187,11 @@ impl NovaNews {
 		let header_title = String::new();
 
 		self.set_header_title(header_title);
-		self.set_window_title(window_title)
+
+		#[cfg(feature = "wayland")]
+		return self.set_window_title(window_title, Id::unique());
+
+		#[cfg(feature = "winit")]
+		return self.set_window_title(window_title);
 	}
 }

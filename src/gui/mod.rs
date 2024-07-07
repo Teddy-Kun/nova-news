@@ -5,6 +5,9 @@ mod main_view;
 
 use crate::err::Error;
 
+#[cfg(feature = "wayland")]
+use libcosmic_wayland as cosmic;
+
 use app::NovaNews;
 use cosmic::app::Settings;
 

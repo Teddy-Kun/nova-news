@@ -1,6 +1,8 @@
-use cosmic::{widget::Grid, Element};
+#[cfg(feature = "wayland")]
+use libcosmic_wayland as cosmic;
 
 use crate::rss;
+use cosmic::{widget::Grid, Element};
 
 use super::app::Message;
 
