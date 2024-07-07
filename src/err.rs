@@ -1,5 +1,6 @@
 use std::{fmt::Debug, process};
 
+#[cfg(feature = "backtrace")]
 use backtrace::Backtrace;
 
 // Universal Error struct.
@@ -36,10 +37,18 @@ impl Error {
 }
 
 impl<T: ToString> From<T> for Error {
+	#[cfg(feature = "backtrace")]
 	fn from(value: T) -> Self {
 		Error {
 			message: value.to_string(),
 			trace: Backtrace::new(),
+		}
+	}
+
+	#[cfg(not(feature = "backtrace"))]
+	fn from(value: T) -> Self {
+		Error {
+			message: value.to_string(),
 		}
 	}
 }
